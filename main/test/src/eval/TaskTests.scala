@@ -198,22 +198,14 @@ trait TaskTests extends TestSuite {
 object SeqTaskTests extends TaskTests {
   def withEnv(f: (Build, TestEvaluator) => Unit)(implicit tp: TestPath) = {
     object build extends Build
-    val check = new TestEvaluator(
-      build,
-      threads = Some(1),
-      extraPathEnd = Seq(getClass().getSimpleName())
-    )
+    val check = new TestEvaluator(build, threads = Some(1))
     f(build, check)
   }
 }
 object ParTaskTests extends TaskTests {
   def withEnv(f: (Build, TestEvaluator) => Unit)(implicit tp: TestPath) = {
     object build extends Build
-    val check = new TestEvaluator(
-      build,
-      threads = Some(16),
-      extraPathEnd = Seq(getClass().getSimpleName())
-    )
+    val check = new TestEvaluator(build, threads = Some(16))
     f(build, check)
   }
 }
